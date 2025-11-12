@@ -12,10 +12,20 @@ public class PlayerMotor : MonoBehaviour
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
 
+    //Sprint and crouch variables 
+    public float sprintSpeed = 8.0f;
+    public float crouchSpeed = 2.5f;
+    private float originalSpeed;
+
+    private float originalHeight;
+    public float crouchHeight = 1.0f;
+    private bool isCrouching = false;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        originalHeight = controller.height;
+        originalSpeed = speed;
     }
 
     void Update()
@@ -47,6 +57,34 @@ public class PlayerMotor : MonoBehaviour
         if (isGrounded)
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+    }
+
+    public void StartSprinting()
+    {
+        speed = sprintSpeed;
+    }
+
+    public void StopSprinting()
+    {
+        speed = originalSpeed;
+    }
+    public void StartCrouching()
+    {
+        if (!isCrouching)
+        {
+            controller.height = crouchHeight;
+            speed = crouchSpeed;
+            isCrouching = true;
+        }
+    }
+    public void StopCrouching()
+    {
+        if (isCrouching)
+        {
+            controller.height = originalHeight;
+            speed = originalSpeed;
+            isCrouching = false;
         }
     }
 }

@@ -187,6 +187,9 @@ MonoBehaviour:
   speed: 15
   gravity: -9.8
   jumpHeight: 3
+  sprintSpeed: 20
+  crouchSpeed: 2.5
+  crouchHeight: 1
 --- !u!136 &65296448
 CapsuleCollider:
   m_ObjectHideFlags: 0

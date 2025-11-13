@@ -31,8 +31,8 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
-        
     }
+
     // recieve inputs from Input Manager.cs and apply them to character controller
     public void ProcessMove(Vector2 input)
     {
@@ -41,6 +41,7 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.z = input.y;
 
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+
         //gravity
         playerVelocity.y += gravity * Time.deltaTime;
 
@@ -48,8 +49,8 @@ public class PlayerMotor : MonoBehaviour
         {
             playerVelocity.y = -2f; //small negative value to keep grounded
         }
+
         controller.Move(playerVelocity * Time.deltaTime);
-        Debug.Log(playerVelocity.y);
     }
 
     public void Jump()
@@ -62,29 +63,50 @@ public class PlayerMotor : MonoBehaviour
 
     public void StartSprinting()
     {
-        speed = sprintSpeed;
+        if (!isCrouching)
+            speed = sprintSpeed;
     }
 
     public void StopSprinting()
     {
-        speed = originalSpeed;
+        if (!isCrouching)
+            speed = originalSpeed;
     }
+
     public void StartCrouching()
     {
-        if (!isCrouching)
-        {
-            controller.height = crouchHeight;
-            speed = crouchSpeed;
-            isCrouching = true;
-        }
+        controller.height = crouchHeight;
+        speed = crouchSpeed;
+        isCrouching = true;
     }
+
     public void StopCrouching()
     {
-        if (isCrouching)
-        {
-            controller.height = originalHeight;
-            speed = originalSpeed;
-            isCrouching = false;
-        }
+        controller.height = originalHeight;
+        speed = originalSpeed;
+        isCrouching = false;
+    }
+
+    // ---- Helper Functions ----
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
+
+    public bool IsMoving()
+    {
+        Vector3 flatVel = new Vector3(controller.velocity.x, 0, controller.velocity.z);
+        return flatVel.magnitude > 0.2f;
+    }
+
+    public bool IsSprinting()
+    {
+        return speed == sprintSpeed;
+    }
+
+    public bool IsCrouching()
+    {
+        return isCrouching;
     }
 }

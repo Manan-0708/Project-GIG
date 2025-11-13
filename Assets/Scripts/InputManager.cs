@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 public class InputManager : MonoBehaviour
 {
@@ -11,6 +8,7 @@ public class InputManager : MonoBehaviour
 
     private PlayerMotor motor;
     private PlayerLook look;
+    private WeaponManager weaponManager;
 
     void Awake()
     {
@@ -19,37 +17,36 @@ public class InputManager : MonoBehaviour
 
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+        weaponManager = GetComponent<WeaponManager>();
 
-        //Jump
         onFoot.Jump.performed += ctx => motor.Jump();
 
-        //Sprint
         onFoot.Sprint.performed += ctx => motor.StartSprinting();
         onFoot.Sprint.canceled += ctx => motor.StopSprinting();
 
-        //Crouch
         onFoot.Crouch.performed += ctx => motor.StartCrouching();
         onFoot.Crouch.canceled += ctx => motor.StopCrouching();
+
+        onFoot.Shoot.performed += ctx => weaponManager.FireCurrentWeapon();
+        onFoot.Melee.performed += ctx => weaponManager.UseMelee();
+
+        onFoot.WeaponScroll.performed += ctx =>
+            weaponManager.ScrollSwitch(ctx.ReadValue<float>());
+
+        onFoot.GamepadWeaponNext.performed += ctx => weaponManager.NextWeapon();
+        onFoot.GamepadWeaponPrevious.performed += ctx => weaponManager.PreviousWeapon();
     }
+
     void FixedUpdate()
     {
-        //tell player motor to move using values from our movement action
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        //tell player look to rotate using values from our look action
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
-    private void OnEnable()
-    {
-        onFoot.Enable();
-    }  
-
-    private void OnDisable()
-    {
-        onFoot.Disable();
-    }
+    void OnEnable() => onFoot.Enable();
+    void OnDisable() => onFoot.Disable();
 }

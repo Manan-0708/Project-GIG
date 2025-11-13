@@ -136,6 +136,51 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""13ea5e1f-ee79-46a9-95b9-733e51b54d36"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""732b5c72-0f58-478b-8203-218bee09f794"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Weapon Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""84c33d5c-fe24-4ade-b34b-e163150259da"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Gamepad Weapon Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""1696b639-b8ad-46aa-ae17-3af719f4d5e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gamepad Weapon Previous"",
+                    ""type"": ""Button"",
+                    ""id"": ""1eda8ac9-e21b-4837-99dd-c418d85dd8aa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -336,6 +381,83 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""420989ea-8644-4264-95b9-029999cd16b5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89b73b74-70a0-421c-94db-f9db5e18d245"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fde5fcb8-b0eb-405b-8226-38ad9056c483"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a3c07d5-d23e-450f-817f-445b961fc3df"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c5bcde2-224f-45d6-9540-92a00012262e"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Weapon Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e28eb03a-8eaa-40dc-a285-b4b42766f703"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gamepad Weapon Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06058c85-8617-446a-9d80-55047dd588dd"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gamepad Weapon Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -349,6 +471,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Crouch = m_OnFoot.FindAction("Crouch", throwIfNotFound: true);
         m_OnFoot_Sprint = m_OnFoot.FindAction("Sprint", throwIfNotFound: true);
+        m_OnFoot_Shoot = m_OnFoot.FindAction("Shoot", throwIfNotFound: true);
+        m_OnFoot_Melee = m_OnFoot.FindAction("Melee", throwIfNotFound: true);
+        m_OnFoot_WeaponScroll = m_OnFoot.FindAction("Weapon Scroll", throwIfNotFound: true);
+        m_OnFoot_GamepadWeaponNext = m_OnFoot.FindAction("Gamepad Weapon Next", throwIfNotFound: true);
+        m_OnFoot_GamepadWeaponPrevious = m_OnFoot.FindAction("Gamepad Weapon Previous", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -434,6 +561,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Crouch;
     private readonly InputAction m_OnFoot_Sprint;
+    private readonly InputAction m_OnFoot_Shoot;
+    private readonly InputAction m_OnFoot_Melee;
+    private readonly InputAction m_OnFoot_WeaponScroll;
+    private readonly InputAction m_OnFoot_GamepadWeaponNext;
+    private readonly InputAction m_OnFoot_GamepadWeaponPrevious;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -465,6 +597,26 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_OnFoot_Sprint;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Shoot".
+        /// </summary>
+        public InputAction @Shoot => m_Wrapper.m_OnFoot_Shoot;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Melee".
+        /// </summary>
+        public InputAction @Melee => m_Wrapper.m_OnFoot_Melee;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/WeaponScroll".
+        /// </summary>
+        public InputAction @WeaponScroll => m_Wrapper.m_OnFoot_WeaponScroll;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/GamepadWeaponNext".
+        /// </summary>
+        public InputAction @GamepadWeaponNext => m_Wrapper.m_OnFoot_GamepadWeaponNext;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/GamepadWeaponPrevious".
+        /// </summary>
+        public InputAction @GamepadWeaponPrevious => m_Wrapper.m_OnFoot_GamepadWeaponPrevious;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -506,6 +658,21 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+            @Melee.started += instance.OnMelee;
+            @Melee.performed += instance.OnMelee;
+            @Melee.canceled += instance.OnMelee;
+            @WeaponScroll.started += instance.OnWeaponScroll;
+            @WeaponScroll.performed += instance.OnWeaponScroll;
+            @WeaponScroll.canceled += instance.OnWeaponScroll;
+            @GamepadWeaponNext.started += instance.OnGamepadWeaponNext;
+            @GamepadWeaponNext.performed += instance.OnGamepadWeaponNext;
+            @GamepadWeaponNext.canceled += instance.OnGamepadWeaponNext;
+            @GamepadWeaponPrevious.started += instance.OnGamepadWeaponPrevious;
+            @GamepadWeaponPrevious.performed += instance.OnGamepadWeaponPrevious;
+            @GamepadWeaponPrevious.canceled += instance.OnGamepadWeaponPrevious;
         }
 
         /// <summary>
@@ -532,6 +699,21 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+            @Melee.started -= instance.OnMelee;
+            @Melee.performed -= instance.OnMelee;
+            @Melee.canceled -= instance.OnMelee;
+            @WeaponScroll.started -= instance.OnWeaponScroll;
+            @WeaponScroll.performed -= instance.OnWeaponScroll;
+            @WeaponScroll.canceled -= instance.OnWeaponScroll;
+            @GamepadWeaponNext.started -= instance.OnGamepadWeaponNext;
+            @GamepadWeaponNext.performed -= instance.OnGamepadWeaponNext;
+            @GamepadWeaponNext.canceled -= instance.OnGamepadWeaponNext;
+            @GamepadWeaponPrevious.started -= instance.OnGamepadWeaponPrevious;
+            @GamepadWeaponPrevious.performed -= instance.OnGamepadWeaponPrevious;
+            @GamepadWeaponPrevious.canceled -= instance.OnGamepadWeaponPrevious;
         }
 
         /// <summary>
@@ -607,5 +789,40 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shoot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShoot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Melee" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMelee(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Weapon Scroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWeaponScroll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Gamepad Weapon Next" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGamepadWeaponNext(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Gamepad Weapon Previous" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGamepadWeaponPrevious(InputAction.CallbackContext context);
     }
 }

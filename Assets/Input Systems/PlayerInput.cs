@@ -181,6 +181,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slide"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f3c2e64-8164-4a23-8e58-5acbca7b278e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -458,6 +467,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Gamepad Weapon Previous"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f795fdc-dddd-4383-94ad-8ec822857de9"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -476,6 +496,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_WeaponScroll = m_OnFoot.FindAction("Weapon Scroll", throwIfNotFound: true);
         m_OnFoot_GamepadWeaponNext = m_OnFoot.FindAction("Gamepad Weapon Next", throwIfNotFound: true);
         m_OnFoot_GamepadWeaponPrevious = m_OnFoot.FindAction("Gamepad Weapon Previous", throwIfNotFound: true);
+        m_OnFoot_Slide = m_OnFoot.FindAction("Slide", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -566,6 +587,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_WeaponScroll;
     private readonly InputAction m_OnFoot_GamepadWeaponNext;
     private readonly InputAction m_OnFoot_GamepadWeaponPrevious;
+    private readonly InputAction m_OnFoot_Slide;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -617,6 +639,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/GamepadWeaponPrevious".
         /// </summary>
         public InputAction @GamepadWeaponPrevious => m_Wrapper.m_OnFoot_GamepadWeaponPrevious;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/Slide".
+        /// </summary>
+        public InputAction @Slide => m_Wrapper.m_OnFoot_Slide;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -673,6 +699,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @GamepadWeaponPrevious.started += instance.OnGamepadWeaponPrevious;
             @GamepadWeaponPrevious.performed += instance.OnGamepadWeaponPrevious;
             @GamepadWeaponPrevious.canceled += instance.OnGamepadWeaponPrevious;
+            @Slide.started += instance.OnSlide;
+            @Slide.performed += instance.OnSlide;
+            @Slide.canceled += instance.OnSlide;
         }
 
         /// <summary>
@@ -714,6 +743,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @GamepadWeaponPrevious.started -= instance.OnGamepadWeaponPrevious;
             @GamepadWeaponPrevious.performed -= instance.OnGamepadWeaponPrevious;
             @GamepadWeaponPrevious.canceled -= instance.OnGamepadWeaponPrevious;
+            @Slide.started -= instance.OnSlide;
+            @Slide.performed -= instance.OnSlide;
+            @Slide.canceled -= instance.OnSlide;
         }
 
         /// <summary>
@@ -824,5 +856,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGamepadWeaponPrevious(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Slide" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSlide(InputAction.CallbackContext context);
     }
 }

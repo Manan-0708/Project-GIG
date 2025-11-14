@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
+
+    private Recoil recoil;
     public float range;
     public float fireRate = .1f;
     public Camera playerCam;
@@ -13,6 +15,9 @@ public class Gun : Weapon
     private void Start()
     {
         playerCam = Camera.main;
+
+        recoil = Camera.main.GetComponentInParent<Recoil>();
+
     }
 
     public override void Attack()
@@ -28,6 +33,7 @@ public class Gun : Weapon
         Vector3 origin = playerCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
         Vector3 direction = playerCam.transform.forward;
 
+            
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, range))
         {
@@ -39,6 +45,12 @@ public class Gun : Weapon
                 enemy.TakeDamage(damage);
             }
         }
+        recoil.ApplyRecoil(
+    recoilUp,
+    Random.Range(-recoilSideways, recoilSideways),
+    recoilKickback
+);
+
     }
 
 

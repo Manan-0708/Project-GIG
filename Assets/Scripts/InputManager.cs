@@ -35,6 +35,10 @@ public class InputManager : MonoBehaviour
 
         onFoot.GamepadWeaponNext.performed += ctx => weaponManager.NextWeapon();
         onFoot.GamepadWeaponPrevious.performed += ctx => weaponManager.PreviousWeapon();
+
+        onFoot.Slide.performed += ctx => motor.StartSlide();
+        onFoot.Slide.canceled += ctx => motor.StopSlide();
+
     }
 
     void FixedUpdate()

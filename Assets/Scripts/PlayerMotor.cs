@@ -21,6 +21,13 @@ public class PlayerMotor : MonoBehaviour
     public float crouchHeight = 1.0f;
     private bool isCrouching = false;
 
+    [Header("Slide Settings")]
+    public float slideSpeed = 10f;
+    public float slideDuration = 0.6f;
+    private bool isSliding = false;
+    private float slideTimer;
+
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -39,6 +46,25 @@ public class PlayerMotor : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
+
+        if (isSliding)
+        {
+            slideTimer -= Time.deltaTime;
+
+            // Move forward faster
+            controller.Move(transform.forward * speed * Time.deltaTime);
+
+            // smooth slowdown
+            speed = Mathf.Lerp(speed, originalSpeed, Time.deltaTime * 3f);
+
+            if (slideTimer <= 0)
+            {
+                StopSlide();
+            }
+
+            return; // do NOT process normal movement
+        }
+
 
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
@@ -86,6 +112,30 @@ public class PlayerMotor : MonoBehaviour
         speed = originalSpeed;
         isCrouching = false;
     }
+
+    public void StartSlide()
+    {
+        // Only slide if moving & sprinting
+        if (isGrounded && speed == sprintSpeed)
+        {
+            isSliding = true;
+            slideTimer = slideDuration;
+            speed = slideSpeed;   // temporary boost
+
+            StartCrouching();     // slide = crouch animation
+        }
+    }
+
+    public void StopSlide()
+    {
+        if (isSliding)
+        {
+            isSliding = false;
+            speed = originalSpeed;
+            StopCrouching();
+        }
+    }
+
 
     // ---- Helper Functions ----
 

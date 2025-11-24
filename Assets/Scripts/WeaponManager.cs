@@ -31,7 +31,8 @@ public class WeaponManager : MonoBehaviour
         if (index < 0 || index >= weapons.Length) return;
         if (weapons[index] == null) return;
         unlocked[index] = true;
-        weapons[index].SetActive(true);
+        // only activate the weapon object if we're equipping it now
+        weapons[index].SetActive(equip);
 
         if (equip) SelectWeapon(index);
     }
@@ -103,6 +104,19 @@ public class WeaponManager : MonoBehaviour
         {
             if (weapons[i] != null)
                 weapons[i].SetActive(i == index && unlocked[i]);
+        }
+
+        // update ammo UI: show only if the selected weapon is a Gun (has ammo)
+        var selected = weapons[index];
+        if (selected != null && selected.TryGetComponent<Gun>(out Gun gun))
+        {
+            AmmoUI.Instance?.SetAmmo(gun.ammoInMagazine, gun.reserveAmmo);
+            AmmoUI.Instance?.SetVisible(true);
+        }
+        else
+        {
+            // no ammo-based weapon selected -> hide ammo UI
+            AmmoUI.Instance?.SetVisible(false);
         }
     }
 }

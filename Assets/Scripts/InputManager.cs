@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
 
     // new: event other systems can subscribe to
     public event Action OnInteractPerformed;
+    // added: reload event
+    public event Action OnReloadPerformed;
 
     void Awake()
     {
@@ -46,6 +48,9 @@ public class InputManager : MonoBehaviour
         // new: interact action - make sure the PlayerInput asset has an "Interact" action
         // this will fire when the player presses the Interact button (e.g. F)
         onFoot.Interact.performed += ctx => OnInteractPerformed?.Invoke();
+
+        // added: reload action - make sure the PlayerInput asset has a "Reload" action
+        onFoot.Reload.performed += ctx => OnReloadPerformed?.Invoke();
     }
 
     void FixedUpdate()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,9 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
     private WeaponManager weaponManager;
+
+    // new: event other systems can subscribe to
+    public event Action OnInteractPerformed;
 
     void Awake()
     {
@@ -39,6 +43,9 @@ public class InputManager : MonoBehaviour
         onFoot.Slide.performed += ctx => motor.StartSlide();
         onFoot.Slide.canceled += ctx => motor.StopSlide();
 
+        // new: interact action - make sure the PlayerInput asset has an "Interact" action
+        // this will fire when the player presses the Interact button (e.g. F)
+        onFoot.Interact.performed += ctx => OnInteractPerformed?.Invoke();
     }
 
     void FixedUpdate()

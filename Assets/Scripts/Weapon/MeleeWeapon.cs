@@ -6,8 +6,12 @@ public class MeleeWeapon : Weapon
 {
     public float range = 2f;
 
+    public AudioSource swingSound;
     public override void Attack()
     {
+        // Play swing sound
+        swingSound?.Play();
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {

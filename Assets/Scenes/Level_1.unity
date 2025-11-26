@@ -817,6 +817,10 @@ MonoBehaviour:
   range: 0
   fireRate: 0.1
   playerCam: {fileID: 0}
+  magazineSize: 30
+  ammoInMagazine: 30
+  reserveAmmo: 90
+  reloadTime: 2
 --- !u!65 &560308485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1523,6 +1527,10 @@ MonoBehaviour:
   range: 10
   fireRate: 5
   playerCam: {fileID: 518745358}
+  magazineSize: 30
+  ammoInMagazine: 30
+  reserveAmmo: 90
+  reloadTime: 2
 --- !u!65 &1221794576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1970,6 +1978,10 @@ MonoBehaviour:
   range: 0
   fireRate: 0.1
   playerCam: {fileID: 0}
+  magazineSize: 30
+  ammoInMagazine: 30
+  reserveAmmo: 90
+  reloadTime: 2
 --- !u!65 &1621547293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2390,6 +2402,10 @@ MonoBehaviour:
   range: 0
   fireRate: 0.1
   playerCam: {fileID: 0}
+  magazineSize: 30
+  ammoInMagazine: 30
+  reserveAmmo: 90
+  reloadTime: 2
 --- !u!65 &2125078993
 BoxCollider:
   m_ObjectHideFlags: 0

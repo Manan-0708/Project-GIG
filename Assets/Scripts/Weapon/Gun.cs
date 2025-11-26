@@ -23,6 +23,11 @@ public class Gun : Weapon
     bool isReloading = false;
     // --------------------
 
+    [Header("Gun Sounds")]
+    public AudioSource fireSound;
+    public AudioSource reloadSound;
+    public AudioSource emptySound;
+
     // added: reference to input manager so we can subscribe to Reload
     InputManager inputManager;
 
@@ -87,6 +92,8 @@ public class Gun : Weapon
 
     IEnumerator ReloadCoroutine()
     {
+
+        reloadSound?.Play();
         if (isReloading) yield break;
         if (ammoInMagazine >= magazineSize) yield break;
         if (reserveAmmo <= 0) yield break;
@@ -171,5 +178,12 @@ public class Gun : Weapon
             Random.Range(-recoilSideways, recoilSideways),
             recoilKickback
         );
+
+        if(ammoInMagazine <=0) {
+                        emptySound?.Play();
+            StartCoroutine(ReloadCoroutine());
+        }
+            fireSound?.Play();
+        
     }
 }
